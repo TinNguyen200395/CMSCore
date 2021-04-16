@@ -1,0 +1,41 @@
+﻿@model Microsoft.AspNetCore.Identity.IdentityRole
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Delete";
+}
+<div class="services-breadcrumb-w3ls-agile">
+    <div class="inner_breadcrumb">
+        <ul class="short">
+            <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a><span>|</span></li>
+            <li><a asp-area="Admin" asp-controller="Role" asp-action="Index">Role</a><span>|</span></li>
+            <li>Delete</li>
+        </ul>
+    </div>
+</div>
+<h3 class="sign" style="background-color:aliceblue">Delete Role :@Html.DisplayFor(model => model.Name) </h3>
+<table class="table">
+    <thead>
+        <tr class="table-primary">
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <td>
+               : @Html.DisplayFor(model => model.Name)
+            </td>
+        </tr>
+    </thead>
+</table>
+<div>
+    <center>
+        <div class="form-group">
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="Id" />
+                <input type="submit" value="Delete" class="btn btn-danger" />
+            </form>
+        </div>
+            <div class="edu_button" style="padding-bottom:10px">
+                <a asp-action="Index" class="btn btn-primary btn-lg hvr-underline-from-left">Back to List</a>
+            </div>
+    </center>
+</div>

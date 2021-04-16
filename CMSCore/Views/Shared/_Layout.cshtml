@@ -1,0 +1,288 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <title>@ViewData["Title"] - CMS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta name="keywords" content="Stretch a Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+
+    <script type="application/x-javascript">
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <link href="~/css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <link href="~/css/style.css" rel='stylesheet' type='text/css' />
+    <link href="~/css/font-awesome.css" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Merriweather+Sans:300,300i,400,400i,700,700i,800" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Mallanna" rel="stylesheet">
+
+</head>
+<body>
+    <div class="top-bar_sub_w3layouts_agile">
+
+        @if (User.Identity.IsAuthenticated)
+        {
+            if (User.IsInRole("Admin"))
+            {
+                <h6> Admin</h6>
+            }
+            if (User.IsInRole("Cordinator"))
+            {
+                <h6> Coordinato</h6>
+            }
+            if (User.IsInRole("Student"))
+            {
+                <h6> Student</h6>
+            }
+            if (User.IsInRole("Manager"))
+            {
+                <h6> Marketing Manager</h6>
+            }
+            if (User.IsInRole(""))
+            {
+                <h6>MAKE CREATIVITY A HABIT</h6>
+            }
+        }
+
+        <partial name="_LoginPartial" />
+        <div class="clearfix"> </div>
+    </div>
+    <div class="header inner_banner" id="home">
+
+        <!--/top-bar-->
+        <div class="top-bar">
+            <div class="header-nav-agileits">
+
+                <nav class="navbar navbar-default">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <h1><a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Greenwich <span>CMS Online</span></a></h1>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1">
+                        <nav>
+                            <ul class="top_nav">
+                                <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                                <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
+                                <li><a asp-area=""   asp-controller="Home" asp-action="LiveChat " target="_parent" >Chat</a></li>
+
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="Pages" role="button" aria-haspopup="true" aria-expanded="false">Functions <span class="fa fa-angle-down"></span></a>
+                                    <ul class="dropdown-menu">
+                                        @if (User.Identity.IsAuthenticated)
+                                        {
+                                            if (User.IsInRole("Admin"))
+                                            {
+                                                <li> <a asp-area="Admin" asp-controller="User" asp-action="Index">Manage User</a></li>
+                                                <li> <a asp-area="Admin" asp-controller="Role" asp-action="Index">Manage Role</a></li>
+                                                <li> <a asp-area="Admin" asp-controller="Topics" asp-action="Index">Manage Topics</a></li>
+                                                <li> <a asp-area="Admin" asp-controller="Departments" asp-action="Index">Manage Departments</a></li>
+
+                                            }
+                                            if (User.IsInRole("Cordinator"))
+                                            {
+                                                <li><a asp-area="Cordinator" asp-controller="Topics" asp-action="Index">Manage Submission</a></li>
+
+                                            }
+                                            if (User.IsInRole("Student"))
+                                            {
+                                                <li><a asp-area="Student" asp-controller="Topics" asp-action="Index">Submit Articles</a></li>
+
+                                            }
+                                            if (User.IsInRole("Manager"))
+                                            {
+                                                <li><a asp-area="Manager" asp-controller="Topics" asp-action="Index">Submission</a></li>
+                                                <li><a href="https://video-call-greenwich.glitch.me/?fbclid=IwAR2P5DAE6g59qmXVOrtOYXDCtAW7zxmI-viG0bOCn18dwAB6lSQD8jELTWk">Call Video</a></li>
+
+                                            }
+                                        }
+                                    </ul>
+                                </li>
+                                <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </nav>
+
+            </div>
+        </div>
+        <!--//top-bar-->
+        <!-- banner-text -->
+        <!--//Slider-->
+    </div>
+    <!--//Header-->
+    <!--/banner_bottom-->
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <!-- bootstrap-modal-pop-up -->
+    <div class="modal video-modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    Luscious
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <img src="~/images/model.jpg" alt=" " class="img-responsive" />
+                    <p>
+                        Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi
+                        consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur,
+                        vel illum qui dolorem eum fugiat quo voluptas nulla pariatur.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- //bootstrap-modal-pop-up -->
+    <!--footer-->
+    <div class="contact-footer-w3layouts-agile">
+
+        <div class="bottom-social-agileits-w3ls">
+            <div class="container">
+                <div class="col-md-8 botttom-nav-w3ls-agileits">
+                    <ul class="f_links col-md-4">
+                        <li>
+                            <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li>
+                            <a asp-area="" asp-controller="Home" asp-action="About">About</a>
+                        </li>
+                        <li>
+                            <a asp-area="" asp-controller="Home" asp-action="Courses">Courses</a>
+                        </li>
+                        <li>
+                            <a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
+                        </li>
+                    </ul>
+                    <ul class="f_links col-md-4">
+                        <li>
+                            <a asp-area="" asp-controller="Home" asp-action="Error404">Blog</a>
+                        </li>
+                        <li>
+                            <a asp-area="" asp-controller="Home" asp-action="Error404">Careers</a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="col-md-4 social-icons-wthree">
+                    <h6>Connect with us</h6>
+                    <a class="facebook" href="https://facebook.com/GreenwichVietnam"><span class="fa fa-facebook"></span></a>
+                    <a class="twitter" href="https://twitter.com/GRELawCrim"><span class="fa fa-twitter"></span></a>
+                    <a class="pinterest" href="https://www.pinterest.com/pin/38843615575041953/"><span class="fa fa-pinterest-p"></span></a>
+                    <a class="linkedin" href="https://www.linkedin.com/learning/search?keywords=Greenwich+&upsellOrderOrigin=homepage-basic_intent-module-learning&trk=learning-serp_learning-search-bar_search-submit"><span class="fa fa-linkedin"></span></a>
+                </div>
+                <div class="clearfix"></div>
+
+            </div>
+        </div>
+        <div class="copy-w3-agileits">
+            <h2 class="footer-logo"><a asp-area="" asp-controller="Home" asp-action="Index">GreenWich <span>Online CMS</span></a></h2>
+            <p>© 2021 Stretch . All Rights Reserved | Design by Group1 </p>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <!--/footer -->
+    <!-- js -->
+    <script type="text/javascript" src="~/js/jquery-2.2.3.min.js"></script>
+    <!-- //js -->
+    <!--search-bar-->
+    <script src="~/js/main.js"></script>
+    <script src="~/js/responsiveslides.min.js"></script>
+    <script>
+        $(function () {
+            $("#slider4").responsiveSlides({
+                auto: true,
+                pager: true,
+                nav: true,
+                speed: 1000,
+                namespace: "callbacks",
+                before: function () {
+                    $('.events').append("<li>before event fired.</li>");
+                },
+                after: function () {
+                    $('.events').append("<li>after event fired.</li>");
+                }
+            });
+        });
+    </script>
+    <!--//search-bar-->
+    <link rel="stylesheet" type="text/css" href="~/css/easy-responsive-tabs.css " />
+    <script src="~/js/easyResponsiveTabs.js"></script>
+    <!--Plug-in Initialisation-->
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            //Vertical Tab
+            $('#parentVerticalTab').easyResponsiveTabs({
+                type: 'vertical', //Types: default, vertical, accordion
+                width: 'auto', //auto or any width like 600px
+                fit: true, // 100% fit in a container
+                closed: 'accordion', // Start closed if in accordion view
+                tabidentify: 'hor_1', // The tab groups identifier
+                activate: function (event) { // Callback function if tab is switched
+                    var $tab = $(this);
+                    var $info = $('#nested-tabInfo2');
+                    var $name = $('span', $info);
+                    $name.text($tab.text());
+                    $info.show();
+                }
+            });
+        });
+    </script>
+    <!--/script-->
+    <!-- start-smoth-scrolling -->
+    <script type="text/javascript" src="~/js/move-top.js"></script>
+    <script type="text/javascript" src="~/js/easing.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
+                $('html,body').animate({
+                    scrollTop: $(this.hash).offset().top
+                }, 900);
+            });
+        });
+    </script>
+    <!-- start-smoth-scrolling -->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            /*
+                                    var defaults = {
+                                            containerID: 'toTop', // fading element id
+                                        containerHoverID: 'toTopHover', // fading element hover id
+                                        scrollSpeed: 1200,
+                                        easingType: 'linear'
+                                        };
+                                    */
+
+            $().UItoTop({
+                easingType: 'easeOutQuart'
+            });
+
+        });
+    </script>
+    <a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+    <script type="text/javascript" src="~/js/bootstrap-3.1.1.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+
+</body>
+</html>

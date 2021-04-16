@@ -1,0 +1,165 @@
+﻿@model CMSCore.Models.Topic
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Details";
+    var Contriburion = (Contribution)ViewData["Contributions"];
+    var Contribution = new Contribution();
+    var contributionId = ViewData["ContributorId"];
+    var comments = (List<Comment>)ViewData["Comments"];
+    var userName = User.Identity.Name;
+
+}
+
+<div class="services-breadcrumb-w3ls-agile">
+    <div class="inner_breadcrumb">
+        <ul class="short">
+            <li class="fa fa-home" aria-hidden="true"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a><span>|</span></li>
+            <li class="fa fa-book" aria-hidden="true"><a asp-area="Student" asp-controller="Topics" asp-action="Index">Topic</a><span>|</span></li>
+            <li class="fa fa-info-circle" aria-hidden="true">Details<span>|</span></li>
+            <li>@Html.DisplayFor(model => model.Title)</li>
+        </ul>
+    </div>
+</div>
+<div class="login" style="padding-left:100px;padding-right:100px;padding-bottom:50px;padding-top:50px">
+    <h3 class="sign" style="background-color:aliceblue">Details @Html.DisplayFor(model => model.Title)</h3>
+    <div id="page-content" class="row">
+        <section id="region-main" class="col-9">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Title)</th>
+                        <td>@Html.DisplayFor(model => model.Title)</td>
+                    </tr>
+                    <tr>
+                        <th>Creation Date</th>
+                        <td>@Html.DisplayFor(model => model.CreationDate)</td>
+                    </tr>
+                    <tr>
+                        <th>Time End</th>
+                        <td>@Html.DisplayFor(model => model.DeadLine_2)</td>
+                    </tr>
+                    <tr>
+                        <th>Grading status</th>
+                        <td>
+                            @if (Contriburion == null)
+                            {
+                                <div></div>
+                            }
+                            else
+                            {
+                                @Contriburion.Status
+                            }
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>File submissions</th>
+                        <td>
+                            @if (Contriburion == null)
+                            {
+                                <div> No Submission yet .</div>
+                            }
+                            else
+                            {
+                                foreach (var file in Contriburion.SubmittedFiles)
+                                {
+                                    <div>
+                                        <a href="@file.URL" download>
+                                            @file.URL.Split("\\").Last()
+                                        </a>
+                                    </div>
+                                }
+                            }
+                        </td>
+                        <td>
+                            @if (Contriburion != null)
+                            {
+                                foreach (var file in Contriburion.SubmittedFiles)
+                                {
+                                    <form asp-action="DeleteUpload" class="mb-2">
+
+                                        <input type="hidden" asp-for="@Contribution.Status" value="@ContributionStatus.Pending" />
+                                        <input type="hidden" asp-for="@Contribution.ContributorId" value="@ViewBag.ContributorId" />
+                                        <input type="hidden" asp-for="@Contribution.TopicId" value="@Model.Id" />
+                                        <input type="hidden" name="fileId" value="@file.Id" />
+                                        <div class="col input-group-append">
+                                            <button type="submit" class="btn btn-danger input-group-text @(Model.DeadLine_2 < DateTime.Now ? "d-none" : "")
+                                                    @(Contribution.Status == ContributionStatus.Approved ? "d-none" : "")">
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                            </button>
+                                        </div>
+                                    </form>
+                                }
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Select file to submit </th>
+                        <td>
+                            <form asp-action="Submit" enctype="multipart/form-data">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <input type="hidden" asp-for="@Contribution.Status" value="@ContributionStatus.Pending" />
+                                <input type="hidden" asp-for="@Contribution.ContributorId" value="@ViewBag.ContributorId" />
+                                <input type="hidden" asp-for="@Contribution.TopicId" value="@Model.Id" />
+                                <center>
+                                    <div class="form-group">
+                                        <input type="file" name="file" class="form-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="submit" value="Upload" class="btn  @(Model.DeadLine_2 < DateTime.Now ?"disabled" : "")" />
+                                    </div>
+                                </center>
+                            </form>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Submission comments</th>
+                        <td>
+                            <center>
+                                <div class="form-group">
+                                    <div class="widget-area no-padding blank">
+                                        <div class="status-upload">
+
+                                            @if (comments != null)
+                                            {
+                                                foreach (var comment in comments)
+                                                {
+                                                    <div class="row">
+                                                        <div class="col-xs-10">
+                                                            <textarea class="form-control">@comment.User.UserName (@comment.Date): @comment.Content</textarea>
+                                                            @if (userName == comment.User.UserName)
+                                                            {
+                                                                <form asp-action="DeleteComment" class="mb-2">
+                                                                    <input name="commentId" value="@comment.Id" type="hidden" />
+                                                                    <input type="hidden" asp-for="@Contribution.ContributorId" value="@ViewBag.ContributorId" />
+                                                                    <input type="hidden" asp-for="@Contribution.Status" value="@ContributionStatus.Pending" />
+                                                                    <button type="submit" class="btn btn-danger " style="float: right" @(Model.DeadLine_2 < DateTime.Now ? "d-none" : "" )><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                                </form>
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                }
+                                            }
+                                            <form asp-action="Comment">
+                                                <input type="hidden" name="topicId" value="@Model.Id" />
+                                                <input type="text" name="commentContent" />
+                                                <button type="submit" class="btn btn-secondary btn-lg hvr-underline-from-left"> <i class="fa fa-share" aria-hidden="true"></i> Comment</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </center>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+</div>
+<center>
+    <div class="edu_button">
+        <a asp-action="Index" class="btn btn-secondary btn-lg hvr-underline-from-left">Back to List</a>
+    </div>
+</center>
+<hr />

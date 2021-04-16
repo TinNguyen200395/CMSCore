@@ -1,0 +1,51 @@
+﻿@model CMSCore.Models.CUser
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Delete";
+}
+<div class="services-breadcrumb-w3ls-agile">
+    <div class="inner_breadcrumb">
+        <ul class="short">
+            <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a><span>|</span></li>
+            <li><a asp-area="Admin" asp-controller="User" asp-action="Index">User</a><span>|</span></li>
+            <li>Delete</li>
+        </ul>
+    </div>
+</div>
+<hr />
+<h3 class="sign" style="background-color:aliceblue">Delete User: @Html.DisplayFor(model => model.UserName)</h3>
+<dl class="row">
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.UserName)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.UserName)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.FirstName)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.FirstName)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.LastName)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.LastName)
+    </dd>
+</dl>
+<div>
+    <center>
+        <div class="form-group">
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="Id" />
+                <input type="submit" value="Delete" class="btn btn-danger" />
+            </form>
+        </div>
+        <div class="edu_button" style="padding-bottom:10px">
+            <a asp-action="Index" class="btn btn-primary btn-lg hvr-underline-from-left">Back to List</a>
+        </div>
+    </center>
+</div>
+<hr />

@@ -1,0 +1,36 @@
+﻿@model CMSCore.Models.Department
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Details";
+}
+<div class="services-breadcrumb-w3ls-agile">
+    <div class="inner_breadcrumb">
+        <ul class="short">
+            <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a><span>|</span></li>
+            <li><a asp-area="Admin" asp-controller="Departments" asp-action="Index">Departments</a><span>|</span></li>
+            <li>Details<span>|</span></li>
+            <li>@Html.DisplayFor(model => model.Name)</li>
+        </ul>
+    </div>
+</div>
+<div class="login" style="padding-left:200px;padding-right:200px;padding-bottom:50px;padding-top:50px">
+    <h3 class="sign" style="background-color:aliceblue">Details Department: @Html.DisplayFor(model => model.Name)</h3>
+    <div>
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+        </dl>
+    </div>
+</div>
+<center>
+    <div class="edu_button">
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary btn-lg hvr-underline-from-left">Edit</a>
+        <a asp-action="Index" class="btn btn-secondary btn-lg hvr-underline-from-left">Back to List</a>
+    </div>
+</center>
+<hr />

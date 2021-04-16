@@ -1,0 +1,34 @@
+﻿@model CMSCore.Models.Department
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Create";
+}
+<div class="services-breadcrumb-w3ls-agile">
+    <div class="inner_breadcrumb">
+        <ul class="short">
+            <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a><span>|</span></li>
+            <li><a asp-area="Admin" asp-controller="Departments" asp-action="Index">Departments</a><span>|</span></li>
+            <li>Create</li>
+        </ul>
+    </div>
+</div>
+<div class="login" style="padding-left:200px;padding-right:200px;padding-bottom:50px;padding-top:50px">
+    <h3 class="sign" style="background-color:aliceblue">Create Departments</h3>
+    <div>
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

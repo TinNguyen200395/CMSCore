@@ -1,0 +1,251 @@
+﻿@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Index";
+}
+<head>
+    <title>@ViewData["Title"] - CMS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta name="keywords" content="Stretch a Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <script type="application/x-javascript">
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <link href="~/css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <link href="~/css/chart.css" rel='stylesheet' type='text/css' />
+    <link href="~/css/style.css" rel='stylesheet' type='text/css' />
+    <link href="~/css/about.css" rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" href="~/css/team.css" type="text/css" media="all" />
+    <link href="~/css/font-awesome.css" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Merriweather+Sans:300,300i,400,400i,700,700i,800" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Mallanna" rel="stylesheet">
+</head>
+<!-- /stats -->
+<hr />
+<div class="stats_test">
+    <h3 class="headerw3 two">Report</h3>
+    <div class="inner_sec_w3_agileinfo">
+        <div class="stats">
+            <div class="stats_left counter_grid">
+                <i class="fa fa-user" aria-hidden="true"></i>
+                <p class="counter">@ViewBag.TotalCoordinater</p>
+                <h4>Coordinator</h4>
+            </div>
+            <div class="stats_left counter_grid1">
+                <i class="fa fa-users" aria-hidden="true"></i>
+                <p class="counter">@ViewBag.TotalStudent</p>
+                <h4>Students</h4>
+            </div>
+            <div class="stats_left counter_grid2">
+                <i class="fa fa-list-alt" aria-hidden="true"></i>
+                <p class="counter">@ViewBag.TotalStudentOfDeparment</p>
+                <h4>Student Of Deparment</h4>
+            </div>
+            <div class="stats_left counter_grid3">
+                <i class="fa fa-building-o" aria-hidden="true"></i>
+                <p class="counter">@ViewBag.TotalDeparment</p>
+                <h4>Deparment</h4>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+    <h3 class="headerw3 two">Chart</h3>
+    <div>
+        <div>
+            <figure class="highcharts-figure">
+                <div id="barchart_material"></div>
+                <p class="highcharts-description">
+                    <h4>Barchart</h4>
+                </p>
+            </figure>
+        </div>
+        <div>
+            <figure class="highcharts-figure">
+                <div id="chart"></div>
+                <p class="highcharts-description">
+                    <h4>Pie Chart</h4>
+                </p>
+            </figure>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+</div>
+<!-- js -->
+<script type="text/javascript" src="~/js/jquery-2.2.3.min.js"></script>
+<!-- //js -->
+<!--search-bar-->
+<script src="~/js/main.js"></script>
+<!--gallery -->
+<script src="~/js/jquery.chocolat.js"></script>
+<!--light-box-files -->
+<script type="text/javascript">
+    $(function () {
+        $('.gallery-grid1 a').Chocolate();
+    });
+</script>
+<!-- //gallery -->
+<script src="~/js/responsiveslides.min.js"></script>
+<script>
+    $(function () {
+        $("#slider4").responsiveSlides({
+            auto: true,
+            pager: true,
+            nav: true,
+            speed: 1000,
+            namespace: "callbacks",
+            before: function () {
+                $('.events').append("<li>before event fired.</li>");
+            },
+            after: function () {
+                $('.events').append("<li>after event fired.</li>");
+            }
+        });
+    });
+</script>
+<!--//search-bar-->
+<link rel="stylesheet" type="text/css" href="~/css/easy-responsive-tabs.css " />
+<script src="~/js/easyResponsiveTabs.js"></script>
+<!--Plug-in Initialisation-->
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        //Vertical Tab
+        $('#parentVerticalTab').easyResponsiveTabs({
+            type: 'vertical', //Types: default, vertical, accordion
+            width: 'auto', //auto or any width like 600px
+            fit: true, // 100% fit in a container
+            closed: 'accordion', // Start closed if in accordion view
+            tabidentify: 'hor_1', // The tab groups identifier
+            activate: function (event) { // Callback function if tab is switched
+                var $tab = $(this);
+                var $info = $('#nested-tabInfo2');
+                var $name = $('span', $info);
+                $name.text($tab.text());
+                $info.show();
+            }
+        });
+    });
+</script>
+<!--/script-->
+<!-- stats -->
+<script src="~/js/jquery.waypoints.min.js"></script>
+<script src="~/js/jquery.countup.js"></script>
+<script>
+    $('.counter').countUp();
+</script>
+<!-- //stats -->
+<!-- start-smoth-scrolling -->
+<script type="text/javascript" src="~/js/move-top.js"></script>
+<script type="text/javascript" src="~/js/easing.js"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        $(".scroll").click(function (event) {
+            event.preventDefault();
+            $('html,body').animate({
+                scrollTop: $(this.hash).offset().top
+            }, 900);
+        });
+    });
+</script>
+<!-- start-smoth-scrolling -->
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        /*
+                                var defaults = {
+                                        containerID: 'toTop', // fading element id
+                                    containerHoverID: 'toTopHover', // fading element hover id
+                                    scrollSpeed: 1200,
+                                    easingType: 'linear'
+                                    };
+                                */
+
+        $().UItoTop({
+            easingType: 'easeOutQuart'
+        });
+
+    });
+</script>
+<a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/js/chart.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.ajax({
+            type: 'GET',
+            dataType: "json",
+            contentType: "application/json",
+            url: '/api/report/department_contribution',
+            success: function (result) {
+                console.log(result);
+                google.charts.load('current', { 'packages': ['corechart'] });
+                google.charts.setOnLoadCallback(function () { drawChart(result); });
+            }
+        });
+
+        $.ajax({
+            type: 'GET',
+            dataType: "json",
+            contentType: "application/json",
+            url: '/api/report/status_contribution',
+            success: function (result) {
+                console.log(result);
+                google.charts.load('current', { 'packages': ['corechart'] });
+                google.charts.setOnLoadCallback(function () { drawCharts(result); });
+            }
+        });
+    });
+
+    function drawChart(result) {
+        var chartwidth = $(".container").width();
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'DepartmentName');
+        data.addColumn('number', 'TotalContribution');
+
+        var dataArray = [];
+        $.each(result, function (i, obj) { dataArray.push([obj.departmentName, obj.totalContribution]); });
+        data.addRows(dataArray);
+
+        var options = {
+            title: "Contribution of Department",
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('chart'));
+        chart.draw(data, options);
+    }
+
+
+    function drawCharts(result) {
+        var chartwidth = $(".container").width();
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'TopicName');
+        data.addColumn('number', 'Approved');
+        data.addColumn('number', 'Pending');
+        data.addColumn('number', 'Rejected');
+        var dataArray = [];
+        $.each(result, function (i, obj) { dataArray.push([obj.topicName, obj.totalApproved, obj.totalPending, obj.totalRejected]); });
+        data.addRows(dataArray);
+
+        var options = {
+            title: "Status of Topic",
+        };
+
+        var chart = new google.visualization.BarChart(document.getElementById('barchart_material'));
+        chart.draw(data, options);
+    }
+</script>

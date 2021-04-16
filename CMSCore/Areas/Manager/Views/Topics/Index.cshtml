@@ -1,0 +1,51 @@
+﻿@model IEnumerable<CMSCore.Models.Topic>
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Index";
+}
+<div class="services-breadcrumb-w3ls-agile">
+    <div class="inner_breadcrumb">
+        <ul class="short">
+            <li class="fa fa-home"aria-hidden="true"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a><span>|</span></li>
+            <li class="fa fa-book"aria-hidden="true">Topic</li>
+        </ul>
+    </div>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeadLine)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeadLine_2)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeadLine)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeadLine_2)
+                </td>
+                <td>
+                    <div class="edu_button">
+                        <a asp-area="Manager" asp-controller="Contributions" asp-action="Index" asp-route-topicId="@item.Id" class="btn btn-secondary btn-lg hvr-underline-from-left">Details</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

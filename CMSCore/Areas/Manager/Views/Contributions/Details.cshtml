@@ -1,0 +1,105 @@
+﻿@model CMSCore.Models.Contribution
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Details";
+    var comments = (List<Comment>)ViewData["Comments"];
+    var contribution = new Contribution();
+    var userName = User.Identity.Name;
+}
+<div class="services-breadcrumb-w3ls-agile">
+    <div class="inner_breadcrumb">
+        <ul class="short">
+            <li class="fa fa-home"aria-hidden="true"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a><span>|</span></li>
+            <li class="fa fa-file-text" aria-hidden="true"><a asp-area="Manager" asp-controller="Topics" asp-action="Index">Contributions</a><span>|</span></li>
+            <li class="fa fa-info-circle"aria-hidden="true">Details<span>|</span></li>
+        </ul>
+    </div>
+</div>
+<div class="login" style="padding-left:100px;padding-right:100px;padding-bottom:50px;padding-top:50px">
+    <h3 class="sign" style="background-color:aliceblue">Details</h3>
+    <div id="page-content" class="row">
+        <section id="region-main" class="col-9">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>Grading status</th>
+                        <td>@Html.DisplayFor(model => model.Status)</td>
+                    </tr>
+                    <tr>
+                        <th> @Html.DisplayNameFor(model => model.Contributor)</th>
+                        <td> @Html.DisplayFor(model => model.Contributor.UserName)</td>
+                    </tr>
+                    <tr>
+                        <th> @Html.DisplayNameFor(model => model.Topic)</th>
+                        <td>@Html.DisplayFor(model => model.Topic.Title)</td>
+                    </tr>
+                    <tr>
+                        <th>Creation Date</th>
+                        <td>@Html.DisplayFor(model => model.Topic.CreationDate)</td>
+                    </tr>
+                    <tr>
+                        <th>File submissions</th>
+                        <td>
+                            @foreach (var file in Model.SubmittedFiles)
+                            {
+                                <div>
+                                    <a asp-action="DownloadFile" asp-route-fileId="@file.Id">
+                                        File Name: @System.IO.Path.GetFileName(file.URL)
+                                    </a>
+                                </div>
+                                <div class="col embed-responsive embed-responsive-4by3" style="height: 855px;">
+                                    <iframe src="@System.IO.Path.Combine("/", System.IO.Path.GetDirectoryName(_Global.PATH_TEMP),
+                                  System.IO.Path.GetFileName(_Global.PATH_TEMP),
+                                  System.IO.Path.GetFileNameWithoutExtension(file.URL) + ".pdf").Replace('\\', '/')"
+                                            class="embed-responsive-item" allowfullscreen="" frameborder="0" scrolling="auto">
+                                    </iframe>
+                                </div>
+
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Submission comments</th>
+                        <td>
+                            <Center>
+                                @if (comments != null)
+                                {
+                                    @foreach (var comment in comments)
+                                    {
+                                        <div class="row">
+                                            <div class="col-xs-10">
+                                                <textarea class="form-control">@comment.User.UserName (@comment.Date): @comment.Content</textarea>
+                                                @if (userName == comment.User.UserName)
+                                                {
+                                                    <form asp-action="DeleteComment" class="mb-2">
+                                                        <input name="commentId" value="@comment.Id" type="hidden" />
+                                                        <input type="hidden" asp-for="@contribution.ContributorId" value="@ViewBag.ContributorId" />
+                                                        <input type="hidden" asp-for="@contribution.Status" value="@ContributionStatus.Pending" />
+                                                        <button type="submit" class="btn btn-danger " style="float: right" @(Model.Topic.DeadLine_2 < DateTime.Now ? "d-none" : "" )><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                    </form>
+                                                }
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                                <form asp-action="Comment">
+                                    <input type="hidden" name="contributionId" value="@Model.Id" />
+                                    <input type="text" name="commentContent" />
+                                    <button type="submit" class="btn btn-secondary btn-lg hvr-underline-from-left"> <i class="fa fa-share"></i> Comment</button>
+                                </form>
+                            </Center>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+</div>
+
+<center>
+    <div class="edu_button">
+        <a asp-area="Manager" asp-controller="Topics" asp-action="Index" class="btn btn-secondary btn-lg hvr-underline-from-left">Back to list</a>
+    </div>
+</center>
+<hr />

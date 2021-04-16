@@ -1,0 +1,73 @@
+﻿@model CMSCore.Models.CUser
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Assign Roles";
+}
+
+<div class="services-breadcrumb-w3ls-agile">
+    <div class="inner_breadcrumb">
+        <ul class="short">
+            <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a><span>|</span></li>
+            <li><a asp-area="Admin" asp-controller="User" asp-action="Index">User</a><span>|</span></li>
+            <li>Assign Role</li>
+        </ul>
+    </div>
+</div>
+<h3 class="sign" style="background-color:aliceblue">Current roles of @Model.Email</h3>
+@{
+    var currentRoles = (List<Microsoft.AspNetCore.Identity.IdentityRole>)ViewData["currentRoles"];
+
+    <table class="table table-hover table-striped text-center align-middle">
+        <thead class="table-dark bg-primary">
+            <tr>
+                <th>
+                    <Center>Role Id</Center>
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var role in currentRoles)
+            {
+                <tr>
+                    <td>
+                        @role.Name
+                    </td>
+                    <td>
+                        <form asp-action="DeleteRole">
+                            <input type="hidden" asp-for="Id" name="userId" />
+                            <input type="hidden" asp-for="@role.Id" name="roleId" />
+
+                            <div class="form-group">
+                                <input type="submit" value="Delete" class="btn btn-danger" />
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+}
+<h3 class="sign" style="background-color:aliceblue">Add roles to this user:</h3>
+<form asp-action="AddToRole">
+    <input type="hidden" asp-for="Id" name="userId" />
+    @Html.ListBox("remainRoles", null, new { @class = "form-control", multiple = "multiple" })
+    <center>
+        <div class="form-group">
+            <br />
+            <button type="submit" class="btn btn-primary">Add Roles</button>
+        </div>
+        <div class="edu_button">
+            <a asp-action="Index" class="btn btn-primary btn-lg hvr-underline-from-left">Back to List</a>
+        </div>
+    </center>
+</form>
+
+<br />
+
+<br />
+<br />
+<br />
+<br />

@@ -1,0 +1,93 @@
+﻿@model PaginatedList<CMSCore.Models.CUser>
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Index";
+}
+<div class="services-breadcrumb-w3ls-agile">
+    <div class="inner_breadcrumb">
+        <ul class="short">
+            <li class="fa fa-home" aria-hidden="true"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a><span>|</span></li>
+            <li class="fa fa-users" aria-hidden="true">User</li>
+        </ul>
+    </div>
+</div>
+<div class="edu_button" style="padding-top:20px">
+    <a class="btn btn-primary btn-lg hvr-underline-from-left" asp-area="Identity" asp-page="/Account/Register"><i class="fa fa-user-plus" aria-hidden="true"> Create new</i></a>
+</div>
+<hr />
+<center>
+    <form asp-action="Index" method="get">
+        <div class="form-actions no-color">
+            <p>
+                Search: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+                <input type="submit" value="Search" class="btn btn-default" />
+                <a asp-action="Index" class="btn btn-default">Back to Full List</a>
+            </p>
+        </div>
+    </form>
+</center>
+<table class="table">
+    <thead>
+        <tr class="table-primary">
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["UserSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]" class="fa fa-filter" aria-hidden="true">User Name</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]" class="fa fa-filter" aria-hidden="true">First Name</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]" class="fa fa-filter" aria-hidden="true">Last Name</a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    <div class="edu_button">
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary btn-lg hvr-underline-from-left">Edit</a>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary btn-lg hvr-underline-from-left">Details</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-primary btn-lg hvr-underline-from-left">Delete</a>
+                        <a asp-action="Assign" asp-route-id="@item.Id" class="btn btn-primary btn-lg hvr-underline-from-left">Assign</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+<center>
+    <div class="edu_button">
+        <a asp-action="Index"
+           asp-route-sortOrder="@ViewData["CurrentSort"]"
+           asp-route-pageNumber="@(Model.PageIndex - 1)"
+           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+           class="btn btn-primary btn-lg hvr-underline-from-left @prevDisabled">
+            Previous
+        </a>
+        <a asp-action="Index"
+           asp-route-sortOrder="@ViewData["CurrentSort"]"
+           asp-route-pageNumber="@(Model.PageIndex + 1)"
+           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+           class="btn btn-primary btn-lg hvr-underline-from-left @nextDisabled">
+            Next
+        </a>
+    </div>
+</center>
+<hr />

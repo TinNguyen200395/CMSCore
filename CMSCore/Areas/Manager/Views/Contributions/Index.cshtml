@@ -1,0 +1,58 @@
+﻿@model IEnumerable<CMSCore.Models.Contribution>
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Index";
+}
+<div class="services-breadcrumb-w3ls-agile">
+    <div class="inner_breadcrumb">
+        <ul class="short">
+            <li class="fa fa-home"aria-hidden="true"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a><span>|</span></li>
+            <li class="fa fa-file-text" aria-hidden="true">Contributions</li>
+        </ul>
+    </div>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Contributor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Topic)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Contributor.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Topic.Id)
+            </td>
+            <td>
+                <div class="edu_button">
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary btn-lg hvr-underline-from-left">Details</a>
+                </div>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+<center>
+    <div class="edu_button">
+        <a asp-area="Manager" asp-controller="Topics" asp-action="Index" class="btn btn-primary btn-lg hvr-underline-from-left">Back to list</a>
+        <a asp-action="DownloadApprovedFile" asp-route-topicId="@ViewBag.TopicId" class="btn btn-primary btn-lg hvr-underline-from-left"><i class="fa fa-download" aria-hidden="true">Download</i></a>
+    </div>
+</center>
+<hr/>
